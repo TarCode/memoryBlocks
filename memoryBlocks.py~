@@ -2,6 +2,7 @@
 #	Author: 	TarCode
 #	File:		memoryPuzzle.py
 #	Ref:		tutorial on http://inventwithpython.com/pygame/
+################################################################################################################
 import random, pygame, sys
 from pygame.locals import *
 
@@ -44,6 +45,8 @@ OVAL = 'oval'
 ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)
 ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)
 assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, "Board is too big for the number of shapes/colors defined."
+
+###################################################################################################################
 
 #  main function
 def main():
@@ -122,12 +125,16 @@ def main():
         pygame.display.update()
         FPSCLOCK.tick(FPS)
 
+#################################################################################################################
+
 # Get data from revealed boxes
 def generateRevealedBoxesData(val):
     revealedBoxes = []
     for i in range(BOARDWIDTH):
         revealedBoxes.append([val] * BOARDHEIGHT)
     return revealedBoxes
+
+##################################################################################################################
 
 def getRandomizedBoard():
     # Get a list of every possible shape in every possible color.
@@ -150,6 +157,24 @@ def getRandomizedBoard():
             del icons[0] # remove the icons as we assign them
         board.append(column)
     return board
+
+#################################################################################################################
+
+def splitIntoGroupsOf(groupSize, theList):
+    # splits a list into a list of lists, where the inner lists have at
+    # most groupSize number of items.
+    result = []
+    for i in range(0, len(theList), groupSize):
+        result.append(theList[i:i + groupSize])
+    return result
+
+#################################################################################################################
+
+def leftTopCoordsOfBox(boxx, boxy):
+    # Convert board coordinates to pixel coordinates
+    left = boxx * (BOXSIZE + GAPSIZE) + XMARGIN
+    top = boxy * (BOXSIZE + GAPSIZE) + YMARGIN
+    return (left, top)
 
 
 
