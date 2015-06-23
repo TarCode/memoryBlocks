@@ -2,6 +2,7 @@
 #	Author: 	TarCode
 #	File:		memoryPuzzle.py
 #	Ref:		tutorial on http://inventwithpython.com/pygame/
+################################################################################################################
 import random, pygame, sys
 from pygame.locals import *
 
@@ -44,6 +45,8 @@ OVAL = 'oval'
 ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)
 ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)
 assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, "Board is too big for the number of shapes/colors defined."
+
+###################################################################################################################
 
 #  main function
 def main():
@@ -122,10 +125,39 @@ def main():
         pygame.display.update()
         FPSCLOCK.tick(FPS)
 
+#################################################################################################################
+
 # Get data from revealed boxes
 def generateRevealedBoxesData(val):
     revealedBoxes = []
     for i in range(BOARDWIDTH):
         revealedBoxes.append([val] * BOARDHEIGHT)
     return revealedBoxes
+
+##################################################################################################################
+
+def getRandomizedBoard():
+    # Get a list of every possible shape in every possible color.
+    icons = []
+    for color in ALLCOLORS:
+        for shape in ALLSHAPES:
+            icons.append( (shape, color) )
+
+    random.shuffle(icons) # randomize the order of the icons list
+    numIconsUsed = int(BOARDWIDTH * BOARDHEIGHT / 2) # calculate how many icons are needed
+    icons = icons[:numIconsUsed] * 2 # make two of each
+    random.shuffle(icons)
+
+    # Create the board data structure, with randomly placed icons.
+    board = []
+    for x in range(BOARDWIDTH):
+        column = []
+        for y in range(BOARDHEIGHT):
+            column.append(icons[0])
+            del icons[0] # remove the icons as we assign them
+        board.append(column)
+    return board
+
+#################################################################################################################
+
 
