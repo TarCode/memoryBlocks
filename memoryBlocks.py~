@@ -29,3 +29,19 @@ YELLOW   = (255, 200,   0)
 ORANGE   = (200, 120,   0)
 PURPLE   = (250,   0, 200)
 CYAN     = (  0, 250, 200)
+
+BGCOLOR = BLACK
+LIGHTBGCOLOR = WHITE
+BOXCOLOR = GRAY
+HIGHLIGHTCOLOR = BLUE
+
+DONUT = 'donut'
+SQUARE = 'square'
+DIAMOND = 'diamond'
+LINES = 'lines'
+OVAL = 'oval'
+
+ALLCOLORS = (RED, GREEN, BLUE, YELLOW, ORANGE, PURPLE, CYAN)
+ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)
+assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT, "Board is too big for the number of shapes/colors defined."
+
