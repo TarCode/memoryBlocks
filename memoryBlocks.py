@@ -245,6 +245,42 @@ def coverBoxesAnimation(board, boxesToCover):
     for coverage in range(0, BOXSIZE + REVEALSPEED, REVEALSPEED):
         drawBoxCovers(board, boxesToCover, coverage)
 
+#################################################################################################################
 
+def drawBoard(board, revealed):
+    # Draws all boxes in covered/reveald state
+    for boxx in range(BOARDWIDTH):
+        for boxy in range(BOARDHEIGHT):
+            left, top = leftTopCoordsOfBox(boxx, boxy)
+            if not revealed[boxx][boxy]:
+                # Draw box covered
+                pygame.draw.rect(DISPLAYSURF, BOXCOLOR, (left, top, BOXSIZE, BOXSIZE))
+            else:
+                # Draw revealed icon.
+                shape, color = getShapeAndColor(board, boxx, boxy)
+                drawIcon(shape, color, boxx, boxy)
+
+#################################################################################################################
+
+def drawHighlightBox(boxx, boxy):
+    left, top = leftTopCoordsOfBox(boxx, boxy)
+    pygame.draw.rect(DISPLAYSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4)
+
+#################################################################################################################
+
+def startGameAnimation(board):
+    # Randomly reveal the boxes 4 at a time.
+    coveredBoxes = generateRevealedBoxesData(False)
+    boxes = []
+    for x in range(BOARDWIDTH):
+        for y in range(BOARDHEIGHT):
+            boxes.append( (x, y) )
+    random.shuffle(boxes)
+    boxGroups = splitIntoGroupsOf(4, boxes)
+
+    drawBoard(board, coveredBoxes)
+    for boxGroup in boxGroups:
+        revealBoxesAnimation(board, boxGroup)
+        coverBoxesAnimation(board, boxGroup)
 
 
