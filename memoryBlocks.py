@@ -122,3 +122,10 @@ def main():
         pygame.display.update()
         FPSCLOCK.tick(FPS)
 
+# Get data from revealed boxes
+def generateRevealedBoxesData(val):
+    revealedBoxes = []
+    for i in range(BOARDWIDTH):
+        revealedBoxes.append([val] * BOARDHEIGHT)
+    return revealedBoxes
+
