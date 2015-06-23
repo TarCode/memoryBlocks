@@ -283,4 +283,33 @@ def startGameAnimation(board):
         revealBoxesAnimation(board, boxGroup)
         coverBoxesAnimation(board, boxGroup)
 
+#################################################################################################################
+
+def gameWonAnimation(board):
+    # flash the background color when the player has won
+    coveredBoxes = generateRevealedBoxesData(True)
+    color1 = LIGHTBGCOLOR
+    color2 = BGCOLOR
+
+    for i in range(13):
+        color1, color2 = color2, color1 # swap colors
+        DISPLAYSURF.fill(color1)
+        drawBoard(board, coveredBoxes)
+        pygame.display.update()
+        pygame.time.wait(300)
+
+#################################################################################################################
+
+def hasWon(revealedBoxes):
+    # Returns True if all boxes are revealed
+    for i in revealedBoxes:
+        if False in i:
+            return False # return False if any boxes are covered.
+    return True
+
+#################################################################################################################
+
+    # Run main
+if __name__ == '__main__':
+    main()
 
