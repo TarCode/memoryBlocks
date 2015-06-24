@@ -10,10 +10,10 @@ FPS = 50 		# frames per second - program speed
 WINDOWWIDTH = 800 	# width in pixels
 WINDOWHEIGHT = 600 	# height in pixels
 REVEALSPEED = 8 	# speed boxes get revealed
-BOXSIZE = 100 		# box height and width in pixels
+BOXSIZE = 35 		# box height and width in pixels
 GAPSIZE = 25 		# gap size between boxes in pixels
-BOARDWIDTH = 4 		# number of columns of icons
-BOARDHEIGHT = 4 	# number of rows of icons
+BOARDWIDTH = 8 		# number of columns of icons
+BOARDHEIGHT = 8 	# number of rows of icons
 
 assert (BOARDWIDTH * BOARDHEIGHT) % 2 == 0, 'Board needs to have an even number of boxes for pairs of matches.'
 XMARGIN = int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE + GAPSIZE))) / 2)
